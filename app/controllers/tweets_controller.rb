@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show edit update destroy ]
+  before_action :set_tweet, only: %i[ show edit update destroy like ]
 
   # GET /tweets or /tweets.json
   def index
@@ -65,6 +65,14 @@ class TweetsController < ApplicationController
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
       end
+    end
+  end
+  def like
+    @tweet.likes = @tweet.likes + 1
+    @tweet.save
+    respond_to do |format|
+      format.html { redirect_to tweets_url, notice: "Like was successfully added." }
+      format.json { head :no_content }
     end
   end
 
