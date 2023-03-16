@@ -1,19 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Tweets</h1>
-
-<div id="tweets">
-  <% @tweets.each do |tweet| %>
-    <%= render tweet %>
-    <p>
-     <%= button_to 'Like this tweet', like_tweet_path(tweet), method: :put %>
-    </p>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-      <hr/>
-    </p>
-
+<div style = "background-color: rgb(244, 244, 255)">
+  <center><h1>Wall of Tweets -  Joel & Elsa :D</h1></center>
+  <br>
+  <div class="walltweet" style = "margin-left:20px;">
+    <%= render 'form', tweet: @tweet %>
+  </div>
+  </table>
+  <% if notice %>
+  <br>
+  <div class="tweetitem" id="notice">
+    <% if notice[0] == "1" %>
+      <% notice.slice!(0) %>
+      <span style="color: green;"><%= notice %></span>
+    <% else %>
+      <span style="color: red;"><%= notice %></span>
+    <% end %>
+  </div>
   <% end %>
-</div>
 
-<%= link_to "New tweet", new_tweet_path %>
+  <div id="tweets">
+    <% @actual_day = "" %>
+    <% @tweets.each do |tweet| %>
+     <% @tweeet_day = tweet.created_at.strftime("%A, %B %d, %Y") %>
+      <% if @actual_day != @tweeet_day %>
+      <h3 style= "padding: 15px">
+        <%= @actual_day = @tweeet_day %>
+      </h3>
+    <% end %>
+    <%= render tweet %>
+    <% end %>
+    </div>
+</div>
