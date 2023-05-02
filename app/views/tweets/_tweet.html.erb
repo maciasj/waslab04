@@ -1,20 +1,41 @@
-<div id="<%= dom_id tweet %>">
-  <p>
-    <strong>Author:</strong>
-    <%= tweet.author %>
-  </p>
 
-  <p>
-    <strong>Content:</strong>
-    <%= tweet.content %>
-  </p>
-  <p>
-    <stron>Created at:</strong>
-    <%= tweet.created_at %>
-  </p>
-  <p>
-    <stron>Likes:</strong>
-    <%= tweet.likes %>
-  </p>
+<div id="<%= dom_id tweet %>"
+     style="border: 3px solid rgb(234, 234, 234);
+            margin: 20px auto;
+            padding: 1em;
+            width: 90%;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;">
+
+  <div class="likes">
+    <span class="numlikes"
+    style = "font-weight: bold;
+    font-size: 1.5em;
+    color: rgb(250,0,0);
+    float: left;
+    width: 95px;
+    margin-top: 0.5em;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;">
+    <%= tweet.likes %></span><br>
+    <span class="plt">people like this</span><br><br>
+
+    <span style= "text-align: center;">
+    <%= button_to 'Like', like_tweet_path(tweet), method: :put %>
+    </span>
+
+    <hr style="height: 100%; margin: 0; border: none; border-right: 2px solid #ccc;">
+
+  </div>
+
+  <div class="user-tweet" style="margin-left: 15px; border-left: 2px solid rgb(204, 204, 232); padding: 10px; max-width:35%;">
+    <p><strong><%= tweet.author %> @ <%= tweet.created_at %></strong></p>
+    <p><%= tweet.content %></p>
+  </div>
+
+  <div style="margin-left: auto;">
+    <%= button_to "Delete this tweet", tweet, method: :delete,class: "delete-btn"%><br>
+  </div>
 
 </div>
